@@ -1,5 +1,7 @@
 import os
 import sys
+import sys
+sys.path.append('/Users/pushpanb/Downloads/MachineLearning')
 from src.exception import CustomException
 from src.logger import logging
 import pandas as pd 
@@ -25,11 +27,11 @@ class DataIngestion:
             df = pd.read_csv('Notebook/data.csv')
             logging.info('Read the dataset as dataframe')
             
-            os.makedir(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
+            os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
             df.to_csv(self.ingestion_config.raw_data_path,index=False,header=True)
 
             logging.info("Train test split initiated")
-            train_set,test_set = train_test_split(df,test_set=0.2,random_state=42)
+            train_set,test_set = train_test_split(df,test_size=0.2,random_state=42)
 
             train_set.to_csv(self.ingestion_config.train_data_path,index=False,header=True)
             test_set.to_csv(self.ingestion_config.test_data_path,index=False,header=True)
